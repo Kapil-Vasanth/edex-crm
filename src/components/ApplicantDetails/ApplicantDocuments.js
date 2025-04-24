@@ -35,16 +35,7 @@ function ApplicantDocuments (){
                   </td>
                 </tr>
                 <tr>
-                  <td>Tertiary Results</td>
-                  <td>No</td>
-                  <td className="action">
-                    <button className="Upload-btn">
-                    <FaUpload /> Upload 
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Valid Visa</td>
+                  <td>College Result</td>
                   <td>No</td>
                   <td className="action">
                     <button className="Upload-btn">
@@ -61,6 +52,34 @@ function ApplicantDocuments (){
                     </button>
                   </td>
                 </tr>
+                <tr>
+                  <td>Cover Letter</td>
+                  <td>No</td>
+                  <td className="action">
+                    <button className="Upload-btn">
+                    <FaUpload /> Upload 
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>SOP</td>
+                  <td>No</td>
+                  <td className="action">
+                    <button className="Upload-btn">
+                    <FaUpload /> Upload 
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>VISA</td>
+                  <td>No</td>
+                  <td className="action">
+                    <button className="Upload-btn">
+                    <FaUpload /> Upload 
+                    </button>
+                  </td>
+                </tr>
+                
               </tbody>
             </table>
           </div>
