@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api', // Change to your backend URL if different
+    baseURL: process.env.REACT_APP_API_BASE_URL, // Fallback to localhost if not defined
 });
+
+console.log("API Base URL:", process.env.REACT_APP_API_BASE_URL)
 
 
 // Get all students
