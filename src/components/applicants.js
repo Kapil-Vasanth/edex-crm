@@ -91,9 +91,10 @@ function Applicants() {
   const [searchTerm, setSearchTerm] = useState("");
   const [universityFilter, setUniversityFilter] = useState("all");
 
-  // Get unique universities for filter dropdown
+  const applicantList = Array.isArray(myApplicants) ? myApplicants : [];
+
   const uniqueUniversities = [
-    ...new Set(myApplicants.map((item) => item.university)),
+    ...new Set(applicantList.map((item) => item.university)),
   ];
   uniqueUniversities.sort();
   uniqueUniversities.unshift("All Universities");
