@@ -4,7 +4,7 @@ const API = axios.create({
     baseURL: process.env.REACT_APP_API_BASE_URL, // Fallback to localhost if not defined
 });
 
-console.log("API Base URL:", process.env.REACT_APP_API_BASE_URL)
+
 
 
 // Get all students
