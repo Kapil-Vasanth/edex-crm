@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({
+export const API = axios.create({
     baseURL: process.env.REACT_APP_API_BASE_URL, // Fallback to localhost if not defined
 });
 
@@ -42,6 +42,7 @@ export const createStudent = async (studentData) => {
 
 // Update a student by ID
 export const updateStudent = async (id, studentData) => {
+    console.log(studentData)
     try {
         const response = await API.put(`/students/${id}`, studentData);
         return response.data; // Returns the updated student
@@ -86,7 +87,7 @@ export const updateStudentAddressDetails = async (id, addressDetails) => {
 
 export const updateStudentEmergencyContacts = async (id, emergencyContacts) => {
     try {
-        const response = await API.put(`/students/${id}/emergency-contacts`, { "emergency_contacts": emergencyContacts });
+        const response = await API.put(`/students/${id}/emergency-details`, { "emergency_contacts": emergencyContacts });
         return response.data; // Returns the updated student
     } catch (error) {
         console.error("Error updating student emergency contacts:", error);
@@ -94,3 +95,60 @@ export const updateStudentEmergencyContacts = async (id, emergencyContacts) => {
     }
 }
 
+export const updateStudentSecondaryEducation = async (id, secondaryEducation) => {
+    try {
+        const response = await API.put(`/students/${id}/academic-details`, { "academic_details": secondaryEducation });
+        return response.data; // Returns the updated student
+    } catch (error) {
+        console.error("Error updating student secondary education:", error);
+        throw error;
+    }
+}
+
+export const updateStudentTertiaryEducation = async (id, tertiaryEducation) => {
+    try {
+        const response = await API.put(`/students/${id}/tertiary-education`, { "tertiary_education": tertiaryEducation });
+        return response.data; // Returns the updated student
+    } catch (error) {
+        console.error("Error updating student secondary education:", error);
+        throw error;
+    }
+}
+
+export const updateStudentEmploymentHistory = async (id, employmentHistory) => {
+    try {
+        const response = await API.put(`/students/${id}/employment-history`, { "employment_history": employmentHistory });
+        return response.data; // Returns the updated student
+    } catch (error) {
+        console.error("Error updating student employment history:", error);
+        throw error;
+    }
+}
+
+export const updateStudentLanguageProficiency = async (id, languageProficiency) => {
+    try {
+        const response = await API.put(`/students/${id}/language-proficiency`, { "language_proficiency": languageProficiency });
+        return response.data; // Returns the updated student
+    } catch (error) {
+        console.error("Error updating student language proficiency:", error);
+        throw error;
+    }
+}
+
+export const uploadStudentAvatar = async (id, selectedFile) => {
+    try {
+      const formData = new FormData();
+      formData.append("avatar", selectedFile);
+  
+      const response = await API.post(`/students/${id}/upload-avatar`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      return response.data; // Returns the updated avatar path or student info
+    } catch (error) {
+      console.error("Error uploading student avatar:", error);
+      throw error;
+    }
+  };

@@ -1209,6 +1209,29 @@ input.description-input {
   width: 100%;
 }
 
+.big-tooltip {
+  width: 300px !important;
+  background: red;
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.big-tooltip h4 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.size-6{
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin: auto;
+}
+
 @media (max-width: 768px) {
   .terms-checkbox {
     font-size: 14px;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { updateStudent } from "../../api/api";
+import { updateStudent, uploadStudentAvatar, API } from "../../api/api";
 import {  useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
@@ -9,25 +9,27 @@ function ApplicantInformation({applicantDetail}) {
   const [formData, setFormData] = useState(applicantDetail);
   const handleEditToggle = () => setIsEditing((prev) => !prev);
 
-  const [avatarPreview, setAvatarPreview] = useState(formData.avatar_url || null);
+  const [avatarPreview, setAvatarPreview] = useState(`${API.defaults.baseURL}/${formData.avatar}` || null);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file && file.type === "image/jpeg") {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatarPreview(reader.result);
+      try {
+        const updatedAvatar = await uploadStudentAvatar(formData._id, file);
+        setAvatarPreview(`${API.defaults.baseURL}/${updatedAvatar.avatar}`);
         setFormData((prev) => ({
           ...prev,
-          avatar_url: reader.result, // Save base64 in formData
+          avatar_url: updatedAvatar.avatar,
         }));
-      };
-      reader.readAsDataURL(file);
+        queryClient.invalidateQueries(["applicants", formData._id]); // Invalidate the query to refetch data
+        toast.success("Profile photo updated successfully!");
+      } catch (error) {
+        toast.error("Error uploading profile photo. Please try again.");
+      }
     } else {
       alert("Please upload a JPG image.");
     }
   };
-
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -35,8 +37,6 @@ function ApplicantInformation({applicantDetail}) {
       [e.target.name]: e.target.value,
     }));
   };
-
- 
 
   const handleSave = async () => {
     try {

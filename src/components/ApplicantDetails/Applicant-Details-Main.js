@@ -21,10 +21,7 @@ function ApplicantDetailsMain() {
     enabled: !!applicantId, // Ensure query only runs if applicantId is available
   });
 
-  if(applicant){
-    console.log("Applicant Data:", applicant);
-  }
-
+  
   // Handle loading and error states
   if (isLoading) {
     return <div>Loading...</div>;
@@ -96,7 +93,7 @@ function ApplicantDetailsMain() {
 
             {activeTab === "programmes" && <Programmes />}
 
-            {activeTab === "academic-background" && <AcademicBackground />}
+            {activeTab === "academic-background" && <AcademicBackground applicant={applicant}/>}
 
             {activeTab === "documents" && <ApplicantDocuments />}
 

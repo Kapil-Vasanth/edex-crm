@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrash, FaSave, FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
@@ -9,6 +9,16 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
   const [contacts, setContacts] = useState(emergencyContacts);
   const [editingIndex, setEditingIndex] = useState(null);
   const [newContact, setNewContact] = useState({ name: "", relationship: "", phone_number: "" });
+
+  useEffect(() => {
+    const normalized = emergencyContacts.map(contact => ({
+      name: contact.name || "",
+      relationship: contact.relationship || "",
+      phone_number: contact.phone_number || ""
+    }));
+    setContacts(normalized);
+  }, [emergencyContacts]);
+  
 
   const handleChange = (e, index) => {
     const updated = contacts.map((contact, i) =>
@@ -46,6 +56,7 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
       toast.success("Emergency contacts updated successfully!");
       queryClient.invalidateQueries(["studentEmergencyContacts", studentId]);
     } catch (error) {
+      handleCancel(); // Reset to original contacts on error
       toast.error("Failed to update emergency contacts: " + error.message);
       console.error("Update error:", error);
     }

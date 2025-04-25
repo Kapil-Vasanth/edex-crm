@@ -101,7 +101,7 @@ const AddressSection = ({ addressDetails = [], studentId }) => {
                         onChange={(e) => handleChange(e, index)}
                       />
                     </td>
-                    <td>
+                    <td className="action">
                       <button className="save-btn" onClick={() => handleSave(index)}>
                         <FaSave />
                       </button>
@@ -114,7 +114,7 @@ const AddressSection = ({ addressDetails = [], studentId }) => {
                   <>
                     <td>{address.address_type}</td>
                     <td>{address.description}</td>
-                    <td>
+                    <td className="action">
                       <button className="edit-btn" onClick={() => setEditingIndex(index)}>
                         <FaEdit />
                       </button>
