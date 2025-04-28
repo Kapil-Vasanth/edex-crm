@@ -4,8 +4,48 @@ export const API = axios.create({
     baseURL: process.env.REACT_APP_API_BASE_URL, // Fallback to localhost if not defined
 });
 
+// Axios request interceptor to include the token in the Authorization header
+API.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`; // Attach token if it exists
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+);
+  
+// Axios response interceptor to handle errors globally (e.g., token expiration)
+API.interceptors.response.use(
+(response) => {
+    return response;
+},
+(error) => {
+    if (error.response && error.response.status === 401) {
+    // Token expired or invalid, handle logout or refresh token here
+    localStorage.removeItem('authToken');
+    // Optionally redirect to login page
+    window.location.href = '/login';
+    }
+    return Promise.reject(error);
+}
+);
 
-
+export const agentLogin = async (email, password) => {
+    try {
+        const response = await API.post('/auth/login', { email, password });
+        const { token, agent } = response.data;
+        localStorage.setItem('authToken', token); // Store the token in localStorage
+        localStorage.setItem('agent', agent.name); // Store the agent email in localStorage
+        return response.data; // Returns the agent data or token
+    } catch (error) {
+        console.error('Error during agent login:', error);
+        throw error; // Propagate the error
+    }
+}
 
 // Get all students
 export const getAllStudents = async () => {
@@ -26,6 +66,24 @@ export const getStudentById = async (id) => {
     } catch (error) {
         console.error('Error fetching student:', error);
         throw error;
+    }
+};
+
+export const uploadStudentAvatar = async (id, selectedFile) => {
+    try {
+      const formData = new FormData();
+      formData.append("avatar", selectedFile);
+  
+      const response = await API.post(`/students/${id}/upload-avatar`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      return response.data; // Returns the updated avatar path or student info
+    } catch (error) {
+      console.error("Error uploading student avatar:", error);
+      throw error;
     }
 };
 
@@ -135,20 +193,13 @@ export const updateStudentLanguageProficiency = async (id, languageProficiency) 
     }
 }
 
-export const uploadStudentAvatar = async (id, selectedFile) => {
+export const updateStudentUnsubmittedProgrammes = async (id, unsubmittedProgrammes) => {
+    console.log("Updating unsubmitted programmes for student ID:", id, "with programmes:", unsubmittedProgrammes);
     try {
-      const formData = new FormData();
-      formData.append("avatar", selectedFile);
-  
-      const response = await API.post(`/students/${id}/upload-avatar`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-  
-      return response.data; // Returns the updated avatar path or student info
+        const response = await API.put(`/students/${id}/unsubmitted-programmes`, { "unsubmitted_programmes": unsubmittedProgrammes });
+        return response.data; // Returns the updated student
     } catch (error) {
-      console.error("Error uploading student avatar:", error);
-      throw error;
+        console.error("Error updating student unsubmitted programmes:", error);
+        throw error;
     }
-  };
+}

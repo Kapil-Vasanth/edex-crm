@@ -22,6 +22,12 @@ function dynamicCurrentMenuClass(selector, currentPath) {
 
 const Header = () => {
   const location = useLocation();
+  const agent = localStorage.getItem('agent'); // Get the token from local storage
+
+  const handleLogOut = () => {
+    localStorage.removeItem('token'); // Remove the token from local storage
+    window.location.href = '/login'; // Redirect to the login page
+  }
 
   useEffect(() => {
     const mainNavUL = document.querySelector('.current-menu');
@@ -42,8 +48,8 @@ const Header = () => {
           <ul className="current-menu">
             <li><Link to="/"><FaHome /> Home</Link></li>
             <li><Link to="/remarks-details"><FaInfoCircle /> Remarks</Link></li>
-            <li><Link to="/log-out"><FaSignOutAlt /> Log Off</Link></li>
-            <li><Link to="/profile"><FaUser /> Prince Vijaykumar</Link></li>
+            <li onClick={() => handleLogOut()}><Link to="/"><FaSignOutAlt /> Log Off</Link></li>
+            <li><Link to="/profile"><FaUser /> {agent || 'Prince Vijaykumar tes'}</Link></li>
           </ul>
         </nav>
       </div>

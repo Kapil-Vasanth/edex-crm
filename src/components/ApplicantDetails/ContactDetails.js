@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
 import ContactSection from "./ContactSection";
 import AddressSection from "./AddressSection";
 import EmergencyContactsSection from "./EmergencyContactsSection";

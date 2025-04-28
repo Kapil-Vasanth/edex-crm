@@ -1,8 +1,11 @@
 import React from "react";
 import { FaArrowUp, FaArrowDown, FaEye } from "react-icons/fa";
+import UnsubmittedProgrammesSection from "./UnsubmittedProgrammesSection";
 
-function Programmes() {
-  // Sample data - replace with your actual data
+function Programmes({applicant}) {
+  
+
+
   const unsubmittedProgrammes = [];
   const submittedProgrammes = [
     {
@@ -26,62 +29,7 @@ function Programmes() {
         </div>
 
         {/* Unsubmitted Programmes Section */}
-        <div className="programmes-section">
-          <div className="section-header">
-            <h4 className="section-title">Unsubmitted Programmes</h4>
-            <button className="add-button">
-              <i className="fas fa-plus"></i> Add Programme
-            </button>
-          </div>
-          <div className="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Programme</th>
-                  <th>Pathway</th>
-                  <th>Year</th>
-                  <th>Intake</th>
-                  <th>Managed By</th>
-                  <th>Priority</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {unsubmittedProgrammes.length > 0 ? (
-                  unsubmittedProgrammes.map((programme, index) => (
-                    <tr key={index}>
-                      <td>{programme.id}</td>
-                      <td>{programme.programme}</td>
-                      <td>{programme.pathway}</td>
-                      <td>{programme.year}</td>
-                      <td>{programme.Intake}</td>
-                      <td>{programme.ManagedBy}</td>
-                      <td>
-                      <button className="priority-btn">
-                <FaArrowUp /> Up
-              </button>
-              <button className="priority-btn">
-                <FaArrowDown /> Down
-              </button>
-                      </td>
-                      <td  className="action-view">
-                      <button className="view-btn" > <FaEye /> View </button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="6" className="no-items">
-                      There are no items to display.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
+        <UnsubmittedProgrammesSection programmes={applicant.unsubmitted_programmes} studentId={applicant._id}/>
         {/* Submitted Programmes Section */}
         <div className="programmes-section">
           <div className="section-header">

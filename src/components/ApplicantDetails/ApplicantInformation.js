@@ -42,6 +42,7 @@ function ApplicantInformation({applicantDetail}) {
     try {
       const updatedStudent = await updateStudent(formData._id, formData);
       console.log("Updated Data:", updatedStudent);
+      toast.success("Updated Personal successfully!");
       queryClient.invalidateQueries(["applicants", formData._id]); // Invalidate the query to refetch data
       setIsEditing(false);
     } catch (error) {
@@ -62,20 +63,25 @@ function ApplicantInformation({applicantDetail}) {
       type: "select",
       options: ["Male", "Female", "Other"],
     },
-    
+    date_of_form_filed: { type: "date" },
+    offer_of_place: { type: "date" },
+    dob: { type: "date" },
+    funds_loan: { type: "date" },
+    funds_direct_deposit: { type: "date" },
+    sop : { type: "date" },
   };
 
   const renderField = (label, name) => {
     const config = fieldConfig[name];
-
-    return (
-      <div className="info-item" key={name}>
-        <span className="info-label">{label}</span>
-        {isEditing ? (
-          config?.type === "select" ? (
+    const value = formData[name] || "";
+  
+    const renderInput = () => {
+      switch (config?.type) {
+        case "select":
+          return (
             <select
               name={name}
-              value={formData[name] || ""}
+              value={value}
               onChange={handleChange}
               className="info-edit-input"
             >
@@ -86,21 +92,48 @@ function ApplicantInformation({applicantDetail}) {
                 </option>
               ))}
             </select>
-          ) : (
+          );
+        case "date":
+          return (
             <input
-              type="text"
+              type="date"
               name={name}
-              value={formData[name] || ""}
+              value={value}
               onChange={handleChange}
               className="info-edit-input"
             />
-          )
-        ) : (
-          <span className="info-value">{formData[name]}</span>
-        )}
+          );
+        case "textarea":
+          return (
+            <textarea
+              name={name}
+              value={value}
+              onChange={handleChange}
+              className="info-edit-input"
+              rows={3}
+            />
+          );
+        default:
+          return (
+            <input
+              type="text"
+              name={name}
+              value={value}
+              onChange={handleChange}
+              className="info-edit-input"
+            />
+          );
+      }
+    };
+  
+    return (
+      <div className="info-item" key={name}>
+        <span className="info-label">{label}</span>
+        {isEditing ? renderInput() : <span className="info-value">{value}</span>}
       </div>
     );
   };
+  
 
   return (
     <div className="details-responsive">
@@ -156,9 +189,15 @@ function ApplicantInformation({applicantDetail}) {
           {renderField("Citizenship", "citizenship")}
           {renderField("Email", "email")}
           {renderField("Phone No.", "phone")}
-          {renderField("Passport No.", "passport")}
+          {renderField("Passport", "passport")}
+          {renderField("Passport Expirty", "passport_expiry")}
           {renderField("IELTS/PTE", "ielts")}
-          {renderField("Application Status", "status")}
+          {renderField("Date of Form Filed", "date_of_form_filed")}
+          {renderField("Offer of Place", "offer_of_place")}
+          {renderField("Funds loan", "funds_loan")}
+          {renderField("Funds Direct Deposit", "funds_direct_deposit")}
+          {renderField("SOP", "sop")}
+          
         </div>
       </div>
     </div>

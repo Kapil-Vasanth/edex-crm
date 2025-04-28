@@ -1232,6 +1232,87 @@ input.description-input {
   margin: auto;
 }
 
+/* AgentLogin.css */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  height: fit-content;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container form div {
+  margin-bottom: 15px;
+}
+
+.login-container form label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.login-container form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  width: 100%;
+}
+
+.login-container form input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.login-container form button {
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container form button:hover {
+  background-color: #45a049;
+}
+
+.login-container form button:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 15px;
+  }
+
+  .login-container h2 {
+    font-size: 20px;
+  }
+}
+
+
 @media (max-width: 768px) {
   .terms-checkbox {
     font-size: 14px;

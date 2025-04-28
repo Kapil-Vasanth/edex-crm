@@ -91,7 +91,7 @@ function ApplicantDetailsMain() {
 
             {activeTab === "contact-details" && <ContactDetails applicantDetail={applicant}/>}
 
-            {activeTab === "programmes" && <Programmes />}
+            {activeTab === "programmes" && <Programmes applicant={applicant}/>}
 
             {activeTab === "academic-background" && <AcademicBackground applicant={applicant}/>}
 

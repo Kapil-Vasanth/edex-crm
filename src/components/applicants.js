@@ -149,7 +149,7 @@ function Applicants() {
   };
 
   const TooltipDesc = ({data}) => {
-    const { student_id, university, citizenship, email, phone, passport, passport_expiry , referred_by, avatar } = data;
+    const { student_id, university, citizenship, email, phone, passport, passport_expiry , referred_by, avatar, dob } = data;
     const avatarPath = avatar ? `${API.defaults.baseURL}/${avatar}` : "https://www.w3schools.com/howto/img_avatar.png";
     return <Tooltip id={data.student_id} className="big-tooltip">
       <img className="size-6" src={avatarPath} alt="Applicant" /> <br/>
@@ -157,6 +157,7 @@ function Applicants() {
       <h4> University : {university} </h4>
       <h4> Citizenship : {citizenship} </h4>
       <h4> Email : {email} </h4>
+      <h4> DOB : {dob} </h4>
       <h4> Phone : {phone} </h4>
       <h4> Passport : {passport} </h4>
       <h4> Passport Expiry: {passport_expiry} </h4>
@@ -209,6 +210,10 @@ function Applicants() {
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>IELTS/PTE Score</th>
+                  <th>Forms</th>
+                  <th>OOP</th>
+                  <th>Funds</th>
+                  <th>SOP</th>
                   <th>Application Status</th>
                   <th>Action</th>
                 </tr>
@@ -223,6 +228,10 @@ function Applicants() {
                     <td>{item.first_name}</td>
                     <td>{item.last_name}</td>
                     <td>{item.ielts}</td>
+                    <td>{item.date_of_form_filed}</td>
+                    <td>{item.offer_of_place}</td>
+                    <td>{item.funds_loan || item.funds_direct_deposit}</td>
+                    <td>{item.sop}</td>
                     <td>{item.status}</td>
                     <td className="action-view">
                       <button className="view-btn" onClick={() => handleViewClick(item)}>
