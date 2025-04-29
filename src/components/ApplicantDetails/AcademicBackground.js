@@ -1,5 +1,4 @@
 import React from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
 import SecondarySection from "./SecondarySection"; // Assuming this is a separate component for secondary education
 import TertiaryEducationSection from "./TertiaryEducationSection";
 import EmploymentHistorySection from "./EmploymentHistorySection";

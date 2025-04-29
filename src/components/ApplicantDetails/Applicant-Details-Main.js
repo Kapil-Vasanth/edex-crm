@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import {  useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query'; // Importing React Query hooks
 import ApplicantInformation from "./ApplicantInformation";
 import ContactDetails from "./ContactDetails";
@@ -10,10 +10,10 @@ import Programmes from "./Programmes";
 import { getStudentById } from "../../api/api"; // Assuming the API function to fetch data
 
 function ApplicantDetailsMain() {
-  const [activeTab, setActiveTab] = useState("applicant-information");
-  const location = useLocation();
-  const { applicantId, applicantName } = location.state || {};
-
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get("tab"); // 'documents'
+  const [activeTab, setActiveTab] = useState(tab || "applicant-information");
+  const { id: applicantId } = useParams();
   // React Query to fetch applicant data by ID
   const { data: applicant, isLoading, isError, error } = useQuery({
     queryKey: ['applicant', applicantId], // The query key and ID
@@ -39,7 +39,7 @@ function ApplicantDetailsMain() {
     <div className="details-wrapper">
       <div className="heading">
         <h4>
-          Applicant Details: {applicantName} ({applicantId})
+          Applicant Details:({applicantId})
         </h4>
       </div>
 
@@ -95,7 +95,7 @@ function ApplicantDetailsMain() {
 
             {activeTab === "academic-background" && <AcademicBackground applicant={applicant}/>}
 
-            {activeTab === "documents" && <ApplicantDocuments />}
+            {activeTab === "documents" && <ApplicantDocuments applicant={applicant}/>}
 
             {activeTab === "submit" && <SubmitApplication />}
           </div>

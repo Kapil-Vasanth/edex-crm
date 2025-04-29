@@ -25,7 +25,7 @@ const Header = () => {
   const agent = localStorage.getItem('agent'); // Get the token from local storage
 
   const handleLogOut = () => {
-    localStorage.removeItem('token'); // Remove the token from local storage
+    localStorage.removeItem('authToken'); // Remove the token from local storage
     window.location.href = '/login'; // Redirect to the login page
   }
 

@@ -87,6 +87,26 @@ export const uploadStudentAvatar = async (id, selectedFile) => {
     }
 };
 
+export const uploadStudentDocument = async (id, formData) => {
+    try {
+      // Add the student ID to the formData for server-side verification
+      formData.append("student_id", id);
+    
+      const response = await API.post(`/students/${id}/upload-document`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    
+      return response.data; // updated student or document object
+    } catch (error) {
+      console.error("Error uploading student document:", error);
+      throw error;
+    }
+  };
+  
+  
+
 // Create a new student
 export const createStudent = async (studentData) => {
     try {

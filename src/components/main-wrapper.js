@@ -8,6 +8,7 @@ import AgentLogin from './AgentLogin'; // Import the AgentLogin component
 import Layout from './Layout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DocumentUploadForm from './DocumentUploadForm';
 
 function Mainwrapper() {
 
@@ -18,6 +19,7 @@ function Mainwrapper() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Maincontent />} />
             <Route path="ApplicantDetails/:id" element={<ApplicantDetails />} />
+            <Route path="ApplicantDetails/:id/uploadDocument" element={<DocumentUploadForm />} />
             <Route path="remarks-details" element={<RemarksDetails />} />
           </Route>
           <Route path="/login" element={<AgentLogin />} /> {/* Add the login route */}

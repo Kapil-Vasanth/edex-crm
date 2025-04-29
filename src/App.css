@@ -916,6 +916,9 @@ ul.list-item li::before {
 .action-view{
   width: 82px;
 }
+.action-buttons{
+  display: flex;
+}
 
 .Documents-container {
   background: #ffffff;
@@ -1300,6 +1303,100 @@ input.description-input {
 .login-container form button:disabled {
   background-color: #d3d3d3;
   cursor: not-allowed;
+}
+
+/* Document Upload Form Section */
+.document-upload-container {
+  max-width: 800px;
+  margin: 40px 40px;
+  padding: 30px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+}
+
+.document-upload-container h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+input[type="text"],
+select,
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.certified-info {
+  font-size: 13px;
+  background-color: #f8f8f8;
+  padding: 12px;
+  border-left: 4px solid #007bff;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.certified-info ul {
+  padding-left: 18px;
+  margin: 8px 0;
+}
+
+.certified-info li {
+  margin-bottom: 4px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 8px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.upload-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+button.cancel-btn {
+  background-color: #ccc;
+  color: #000;
+}
+
+button:hover {
+  opacity: 0.9;
 }
 
 @media (max-width: 480px) {

@@ -9,7 +9,9 @@ function ApplicantInformation({applicantDetail}) {
   const [formData, setFormData] = useState(applicantDetail);
   const handleEditToggle = () => setIsEditing((prev) => !prev);
 
-  const [avatarPreview, setAvatarPreview] = useState(`${API.defaults.baseURL}/${formData.avatar}` || null);
+  const [avatarPreview, setAvatarPreview] = useState(
+    formData.avatar ? `${API.defaults.baseURL}/${formData.avatar}` : null
+  );
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -69,6 +71,7 @@ function ApplicantInformation({applicantDetail}) {
     funds_loan: { type: "date" },
     funds_direct_deposit: { type: "date" },
     sop : { type: "date" },
+    passport_expiry: { type: "date" },
   };
 
   const renderField = (label, name) => {
@@ -190,7 +193,7 @@ function ApplicantInformation({applicantDetail}) {
           {renderField("Email", "email")}
           {renderField("Phone No.", "phone")}
           {renderField("Passport", "passport")}
-          {renderField("Passport Expirty", "passport_expiry")}
+          {renderField("Passport Expiry", "passport_expiry")}
           {renderField("IELTS/PTE", "ielts")}
           {renderField("Date of Form Filed", "date_of_form_filed")}
           {renderField("Offer of Place", "offer_of_place")}
