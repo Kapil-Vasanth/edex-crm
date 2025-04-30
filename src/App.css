@@ -1020,11 +1020,11 @@ ul.list-item li::before {
   justify-content: flex-end;
   gap: 10px;
 }
-.edit-btn {
-  background: #007bff;
+.edit-actions .edit-btn {
+  background: #0269d7;
   color: #fff;
 }
-.save-btn {
+.edit-actions .save-btn {
   background-color: #7cc051;
   color: #fff;
 }
