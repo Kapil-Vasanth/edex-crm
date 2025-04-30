@@ -1015,7 +1015,19 @@ ul.list-item li::before {
   gap: 8px;
   transition: background-color 0.2s;
 }
-
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.edit-btn {
+  background: #007bff;
+  color: #fff;
+}
+.save-btn {
+  background-color: #7cc051;
+  color: #fff;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

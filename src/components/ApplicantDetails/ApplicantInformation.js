@@ -145,9 +145,11 @@ function ApplicantInformation({applicantDetail}) {
           <h3 className="info-title">Personal Information</h3>
           <div className="divider"></div>
           {!isEditing ? (
+            <div className="edit-actions">
             <button onClick={handleEditToggle} className="edit-btn">
               Edit
             </button>
+            </div>
           ) : (
             <div className="edit-actions">
               <button onClick={handleSave} className="save-btn">
