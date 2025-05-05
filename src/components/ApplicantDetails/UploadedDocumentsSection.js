@@ -10,10 +10,10 @@ const UploadedDocumentsSection = ({ documents = [],  onDelete }) => {
 	}
 	
 	const onDownload = (fileSrc) => {
+			console.log(fileSrc);
 			if (!fileSrc) return;
-			
 			const link = document.createElement("a");
-			link.href = fileSrc;
+			link.href = `${process.env.REACT_APP_API_BASE_URL || ""}${fileSrc}`;
 			link.download = fileSrc.split("/").pop(); // File name from URL
 			link.target = "_blank"; // Optional: open in new tab if browser blocks downloads
 			document.body.appendChild(link);
