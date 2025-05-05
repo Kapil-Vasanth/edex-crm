@@ -47,7 +47,7 @@ const Header = () => {
         <nav>
           <ul className="current-menu">
             <li><Link to="/"><FaHome /> Home</Link></li>
-            <li><Link to="/remarks-details"><FaInfoCircle /> Remarks</Link></li>
+            {/* <li><Link to="/remarks-details"><FaInfoCircle /> Remarks</Link></li> */}
             <li onClick={() => handleLogOut()}><Link to="/"><FaSignOutAlt /> Log Off</Link></li>
             <li><Link to="/profile"><FaUser /> {agent || 'Prince Vijaykumar tes'}</Link></li>
           </ul>
