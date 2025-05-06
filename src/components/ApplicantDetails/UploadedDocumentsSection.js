@@ -1,6 +1,6 @@
 import React from "react";
 import { FaDownload, FaTrash } from "react-icons/fa";
-import { MdCheckBox } from "react-icons/md";
+import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import {  useNavigate } from "react-router-dom";
 
 const UploadedDocumentsSection = ({ documents = [],  onDelete }) => {
@@ -13,7 +13,7 @@ const UploadedDocumentsSection = ({ documents = [],  onDelete }) => {
 			console.log(fileSrc);
 			if (!fileSrc) return;
 			const link = document.createElement("a");
-			link.href = `${process.env.REACT_APP_API_BASE_URL || ""}${fileSrc}`;
+			link.href = `${process.env.REACT_APP_API_BASE_URL || ""}/${fileSrc}`;
 			link.download = fileSrc.split("/").pop(); // File name from URL
 			link.target = "_blank"; // Optional: open in new tab if browser blocks downloads
 			document.body.appendChild(link);
@@ -48,7 +48,7 @@ const UploadedDocumentsSection = ({ documents = [],  onDelete }) => {
 							<tr key={index}>
 								<td>{doc.document_type || "-"}</td>
 								<td>{doc.file_name || "-"}</td>
-								<td><MdCheckBox /></td>
+								<td>{doc.certified === "yes" ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}</td>
 								<td>{doc.certified_by || "-"}</td>
 								<td>{doc.certified_date ? new Date(doc.certified_date).toLocaleDateString() : "-"}</td>
 								<td>{doc.upload_date ? new Date(doc.upload_date).toLocaleDateString() : "-"}</td>

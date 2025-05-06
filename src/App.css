@@ -16,6 +16,19 @@ body {
 a{
   transition: all .2s ease;
 }
+
+.current-menu li{
+  color: #fff;
+  cursor: pointer;
+}
+.current-menu li svg{
+  margin-right: 10px;
+}
+
+.login-footer{
+  margin-top: 10px;
+}
+
 header {
   background-image: linear-gradient(to bottom, #414141 0%, #323232 100%); 
   position: relative;
@@ -44,6 +57,8 @@ nav ul li {
   border-bottom: 1px solid #000;
   transition: all .2s ease;
   box-shadow:none;
+  color: #fff;
+  cursor: pointer;
 }
 nav ul li.current, nav ul li:hover {
   background-color: #272727;

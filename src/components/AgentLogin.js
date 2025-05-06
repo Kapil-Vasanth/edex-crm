@@ -47,6 +47,10 @@ const AgentLogin = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+
+      <div className="login-footer">
+        Student? <a href="/student-login">Login here</a>
+      </div>
     </div>
   );
 };

@@ -167,7 +167,7 @@ function Applicants() {
 
   // Loading state and error handling
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error fetching applicants</div>;
+  if (error) return <div>Error fetching applicants {error?.response?.data?.message || error.message}</div>;
 
   return (
     <div className="details-wrapper">

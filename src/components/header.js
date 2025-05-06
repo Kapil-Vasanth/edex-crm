@@ -23,10 +23,24 @@ function dynamicCurrentMenuClass(selector, currentPath) {
 const Header = () => {
   const location = useLocation();
   const agent = localStorage.getItem('agent'); // Get the token from local storage
+  const student = localStorage.getItem('student'); // Get the token from local storage
+  const role = localStorage.getItem('role'); // Get the token from local storage
 
   const handleLogOut = () => {
     localStorage.removeItem('authToken'); // Remove the token from local storage
-    window.location.href = '/login'; // Redirect to the login page
+    if(role === 'student') {
+      window.location.href = '/student-login'; // Redirect to the student login page
+    } else {
+      window.location.href = '/login'; // Redirect to the login page
+    }
+  }
+
+  const handleHomeClick = () => {
+    if(role === 'student') {
+      window.location.href = '/student-login'; // Redirect to the student dashboard
+    } else {
+      window.location.href = '/'; // Redirect to the home page
+    }
   }
 
   useEffect(() => {
@@ -46,10 +60,10 @@ const Header = () => {
         </div>
         <nav>
           <ul className="current-menu">
-            <li><Link to="/"><FaHome /> Home</Link></li>
+            <li onClick={() => handleHomeClick()}><FaHome /> Home</li>
             {/* <li><Link to="/remarks-details"><FaInfoCircle /> Remarks</Link></li> */}
-            <li onClick={() => handleLogOut()}><Link to="/"><FaSignOutAlt /> Log Off</Link></li>
-            <li><Link to="/profile"><FaUser /> {agent || 'Prince Vijaykumar tes'}</Link></li>
+            <li onClick={() => handleLogOut()}><FaSignOutAlt /> Log Out</li>
+            <li><Link to="/profile"><FaUser /> {agent || student || 'Anonymous'}</Link></li>
           </ul>
         </nav>
       </div>

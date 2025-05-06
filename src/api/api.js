@@ -38,11 +38,28 @@ export const agentLogin = async (email, password) => {
     try {
         const response = await API.post('/auth/login', { email, password });
         const { token, agent } = response.data;
+        localStorage.clear(); // Clear any existing localStorage data
         localStorage.setItem('authToken', token); // Store the token in localStorage
         localStorage.setItem('agent', agent.name); // Store the agent email in localStorage
+        localStorage.setItem('role', agent.role); // Store the agent role in localStorage
         return response.data; // Returns the agent data or token
     } catch (error) {
         console.error('Error during agent login:', error);
+        throw error; // Propagate the error
+    }
+}
+
+export const studentLogin = async (email, password) => {
+    try {
+        const response = await API.post('/auth/student-login', { email, password });
+        const { token, student } = response.data;
+        localStorage.clear(); // Clear any existing localStorage data
+        localStorage.setItem('authToken', token); // Store the token in localStorage
+        localStorage.setItem('student', student.first_name); // Store the student name in localStorage
+        localStorage.setItem('role', 'student'); // Store the student role in localStorage
+        return response.data; // Returns the student data or token
+    } catch (error) {
+        console.error('Error during student login:', error);
         throw error; // Propagate the error
     }
 }
