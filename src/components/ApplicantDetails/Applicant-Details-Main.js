@@ -97,7 +97,7 @@ function ApplicantDetailsMain() {
 
             {activeTab === "documents" && <ApplicantDocuments applicant={applicant}/>}
 
-            {activeTab === "submit" && <SubmitApplication />}
+            {activeTab === "submit" && <SubmitApplication applicant={applicant}/>}
           </div>
         </div>
       </div>

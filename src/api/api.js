@@ -75,6 +75,28 @@ export const getAllStudents = async () => {
     }
 };
 
+// Send forgot password email
+export const forgotPassword = async (email) => {
+    try {
+      const response = await API.post('/auth/forgot-password', { email });
+      return response.data; // Expected to return { message: 'Password reset link sent to email' }
+    } catch (error) {
+      console.error('Error sending forgot password request:', error);
+      throw error;
+    }
+};
+  
+// Reset the password
+export const resetPassword = async (token, newPassword) => {
+try {
+    const response = await API.post('/auth/reset-password', { token, newPassword });
+    return response.data; // Expected to return { message: 'Password has been reset successfully' }
+} catch (error) {
+    console.error('Error resetting password:', error);
+    throw error;
+}
+};
+
 // Get a student by ID
 export const getStudentById = async (id) => {
     try {

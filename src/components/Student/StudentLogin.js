@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { studentLogin as studentLoginApi } from '../../api/api'; // Your API function
+import { studentLogin as studentLoginApi } from '../../api/api';
 
 const StudentLogin = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ const StudentLogin = () => {
 
       if (token && student) {
         toast.success('Login successful!');
-        navigate(`/ApplicantDetails/${student.student_id}`); // Redirect to student profile page
+        navigate(`/ApplicantDetails/${student.student_id}`);
       }
     } catch (error) {
       console.error('Login failed:', error);
@@ -24,17 +24,9 @@ const StudentLogin = () => {
   };
 
   return (
-    <div className='text-center'
-      style={{
-        padding: '20px',
-        backgroundColor: '#f0f0f0',
-        borderRadius: '8px',
-        width: '400px',
-        margin: 'auto',
-        marginTop: '50px'
-      }}>
+    <div className="login-container">
       <h1>Student Login</h1>
-      <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', width: '300px', margin: 'auto' }}>
+      <form className="login-form" onSubmit={handleLogin}>
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -43,10 +35,9 @@ const StudentLogin = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           required
-          style={{ marginBottom: '10px', padding: '8px' }}
         />
 
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" style={{marginTop: '20px'}}>Password:</label>
         <input
           type="password"
           id="password"
@@ -54,19 +45,15 @@ const StudentLogin = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Enter your password"
           required
-          style={{ marginBottom: '10px', padding: '8px' }}
         />
 
-        <button type="submit"
-          style={{
-            padding: '10px',
-            backgroundColor: '#007BFF',
-            color: 'white',
-            border: 'none',
-            cursor: 'pointer'
-          }}>
-          Login
-        </button>
+        
+        <button type="submit" style={{marginTop: '20px'}}>Login</button>
+        
+
+        <div className="forgot-password-link" style={{marginTop: '20px'}}>
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </div>
       </form>
     </div>
   );

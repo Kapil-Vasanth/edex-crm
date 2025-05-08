@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHome, FaInfoCircle,  FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaHome,  FaSignOutAlt, FaUser } from 'react-icons/fa';
 import logo from './images/logo.jpg';
 
 function dynamicCurrentMenuClass(selector, currentPath) {
@@ -63,7 +63,7 @@ const Header = () => {
             <li onClick={() => handleHomeClick()}><FaHome /> Home</li>
             {/* <li><Link to="/remarks-details"><FaInfoCircle /> Remarks</Link></li> */}
             <li onClick={() => handleLogOut()}><FaSignOutAlt /> Log Out</li>
-            <li><Link to="/profile"><FaUser /> {agent || student || 'Anonymous'}</Link></li>
+            <li><FaUser /> {agent || student || 'Anonymous'}</li>
           </ul>
         </nav>
       </div>

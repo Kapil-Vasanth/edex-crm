@@ -2,36 +2,10 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 
-function SubmitApplication({appplicant}) {
-  const location = useLocation();
-  const {
-    applicantId,
-    applicantName,
-    applicantStatus,
-    applicantIELTS,
-    applicantPassport,
-    applicantPhone,
-    applicantEmail,
-    applicantCitizenship,
-    applicantGender,
-    applicantDOB,
-    applicantUniversity,
-  } = location.state || {};
+function SubmitApplication({applicant}) {
+  
 
-  const unsubmittedProgrammes = [];
-  const submittedProgrammes = [
-    {
-      id: "1838333",
-      programme: "Master of Computer and Information Sciences",
-      pathway: "Standard",
-      year: "2025",
-      Intake: "Full Year",
-      Status: "On hold",
-      Explanation:
-        "Your application for this programme is on hold. For your application to continue you need to provide the documents we have requested",
-      ActionRequired: "Please check Arion correspondence for details",
-    },
-  ];
+  const submittedProgrammes = [];
  
     const [isAgreed, setIsAgreed] = useState(false);
   
@@ -88,57 +62,95 @@ function SubmitApplication({appplicant}) {
           <div className="info-grid">
             <div className="info-item">
               <span className="info-label">Student ID</span>
-              <span className="info-value">{applicantId}</span>
+              <span className="info-value">{applicant?.student_id}</span>
             </div>
 
             <div className="info-item">
-              <span className="info-label">Full Name</span>
-              <span className="info-value">{applicantName}</span>
+              <span className="info-label">First Name</span>
+              <span className="info-value">{applicant?.first_name}</span>
+            </div>
+
+            <div className="info-item">
+              <span className="info-label">Last Name</span>
+              <span className="info-value">{applicant?.last_name}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">University</span>
-              <span className="info-value">{applicantUniversity}</span>
+              <span className="info-value">{applicant?.university}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">Date of Birth</span>
-              <span className="info-value">{applicantDOB}</span>
+              <span className="info-value">{applicant?.dob}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">Gender</span>
-              <span className="info-value">{applicantGender}</span>
+              <span className="info-value">{applicant?.gender}</span>
+            </div>
+
+            <div className="info-item">
+              <span className="info-label">Country</span>
+              <span className="info-value">{applicant?.country}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">Citizenship</span>
-              <span className="info-value">{applicantCitizenship}</span>
+              <span className="info-value">{applicant?.citizenship}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">Email</span>
-              <span className="info-value">{applicantEmail}</span>
+              <span className="info-value">{applicant?.email}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">Phone No.</span>
-              <span className="info-value">{applicantPhone}</span>
+              <span className="info-value">{applicant?.phone}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">Passport No.</span>
-              <span className="info-value">{applicantPassport}</span>
+              <span className="info-value">{applicant?.passport}</span>
+            </div>
+
+            <div className="info-item">
+              <span className="info-label">Passport Expiry.</span>
+              <span className="info-value">{applicant?.passport_expiry}</span>
             </div>
 
             <div className="info-item">
               <span className="info-label">IELTS/PTE</span>
-              <span className="info-value">{applicantIELTS}</span>
+              <span className="info-value">{applicant?.ielts}</span>
             </div>
+
             <div className="info-item">
-              <span className="info-label">Application Status</span>
-              <span className="info-value">{applicantStatus}</span>
+              <span className="info-label">Date of Form Filed</span>
+              <span className="info-value">{applicant?.date_of_form_filed}</span>
             </div>
+
+            <div className="info-item">
+              <span className="info-label">Offer of Place</span>
+              <span className="info-value">{applicant?.offer_of_place}</span>
+            </div>
+
+            <div className="info-item">
+              <span className="info-label">Funds Loan</span>
+              <span className="info-value">{applicant?.funds_loan}</span>
+            </div>
+
+            <div className="info-item">
+              <span className="info-label">Funds Direct Deposit</span>
+              <span className="info-value">{applicant?.funds_direct_deposit}</span>
+            </div>
+
+            <div className="info-item">
+              <span className="info-label">SOP</span>
+              <span className="info-value">{applicant?.sop}</span>
+            </div>
+
+
           </div>
         </div>
         <div className="contact-details-container">
@@ -162,16 +174,14 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>Mobile Phone</td>
-                    <td>N/A</td>
-                    <td>{applicantPhone}</td>
-                  </tr>
-                  <tr>
-                    <td>Contact Email</td>
-                    <td>N/A</td>
-                    <td>{applicantEmail}</td>
-                  </tr>
+                  {applicant?.contact_details.map((contact, index) => (
+                    <tr key={index}>
+                      <td>{contact.contact_type}</td>
+                      <td>{contact.name}</td>
+                      <td>{contact.description}</td>
+                    </tr>
+                  ))}
+                  
                 </tbody>
               </table>
             </div>
@@ -191,20 +201,12 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>Home</td>
-                    <td>
-                      Geffrey J 5 Officers Colony Adambakkam Tamil Nadu India
-                      600088
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Permanent</td>
-                    <td>
-                      Geffrey J 5 Officers Colony Adambakkam Tamil Nadu India
-                      600088
-                    </td>
-                  </tr>
+                  {applicant?.address_details.map((address, index) => (
+                    <tr key={index}>
+                      <td>{address.address_type}</td>
+                      <td>{address.description}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -225,11 +227,13 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>A.Glint</td>
-                    <td>Mother</td>
-                    <td>+91 9150780442</td>
-                  </tr>
+                  {applicant?.emergency_contacts.map((contact, index) => (
+                    <tr key={index}>
+                      <td>{contact.name}</td>
+                      <td>{contact.relationship}</td>
+                      <td>{contact.phone_number}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -259,24 +263,16 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody>
-                  {unsubmittedProgrammes.length > 0 ? (
-                    unsubmittedProgrammes.map((programme, index) => (
-                      <tr key={index}>
-                        <td>{programme.id}</td>
-                        <td>{programme.programme}</td>
-                        <td>{programme.pathway}</td>
-                        <td>{programme.year}</td>
-                        <td>{programme.Intake}</td>
-                        <td>{programme.ManagedBy}</td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="6" className="no-items">
-                        There are no items to display.
-                      </td>
+                 {applicant?.unsubmitted_programmes.map((programme, index) => (
+                    <tr key={index}>
+                      <td>{programme.id}</td>
+                      <td>{programme.programme}</td>
+                      <td>{programme.pathway}</td>
+                      <td>{programme.year}</td>
+                      <td>{programme.intake}</td>
+                      <td>{programme.managed_by}</td>
                     </tr>
-                  )}
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -340,12 +336,14 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>Montfort. Mat. Hr. Sec. School</td>
-                    <td>12th standard</td>
-                    <td>India</td>
-                    <td>2018 - 2020</td>
-                  </tr>
+                  {applicant?.academic_details.map((education, index) => (
+                    <tr key={index}>
+                      <td>{education.school}</td>
+                      <td>{education.qualification}</td>
+                      <td>{education.country}</td>
+                      <td>{education.period}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -368,18 +366,16 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>Patrician college of Arts and Science</td>
-                    <td>B.Sc Computer Science</td>
-                    <td>India</td>
-                    <td>2020 - 2023</td>
-                    <td>
-                      <MdCheckBox />
-                    </td>
-                    <td>
-                      <MdCheckBoxOutlineBlank />
-                    </td>
-                  </tr>
+                  {applicant?.tertiary_education.map((education, index) => (
+                    <tr key={index}>
+                      <td>{education.institution}</td>
+                      <td>{education.qualification}</td>
+                      <td>{education.country}</td>
+                      <td>{education.period}</td>
+                      <td>{education.completed ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}</td>
+                      <td>{education.awaiting_results ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -400,29 +396,14 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>APA Engineering</td>
-                    <td>2023-2024</td>
-                    <td>Software developer</td>
-                    <td>Development ERP system for an e-commerce app.</td>
-                  </tr>
-                  <tr>
-                    <td>Zealeye.AI</td>
-                    <td>2021-2022</td>
-                    <td>Frontend Developer Intern</td>
-                    <td>
-                      Develop frontend features and responsive designs for a
-                      home loan app.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Out of Shop</td>
-                    <td>2021-2021</td>
-                    <td>Product tester intern</td>
-                    <td>
-                      Manual testing and provided feedback for an e-commerce app
-                    </td>
-                  </tr>
+                  {applicant?.employment_history.map((employment, index) => (
+                    <tr key={index}>
+                      <td>{employment.employer}</td>
+                      <td>{employment.period}</td>
+                      <td>{employment.position}</td>
+                      <td>{employment.nature_of_work}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -442,11 +423,13 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>English Proficiency</td>
-                    <td>English Is First Language</td>
-                    <td>Yes</td>
-                  </tr>
+                  {applicant?.language_proficiency.map((language, index) => (
+                    <tr key={index}>
+                      <td>{language.language}</td>
+                      <td>{language.description}</td>
+                      <td>{language.yes_no ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -509,36 +492,16 @@ function SubmitApplication({appplicant}) {
                   </tr>
                 </thead>
                 <tbody id="content">
-                  <tr>
-                    <td>CV</td>
-                    <td>jeffresume__2_.pdf</td>
-                    <td>
-                      <MdCheckBox />
-                    </td>
-                    <td>Prince Vijaykumar</td>
-                    <td>12/Nov/2024</td>
-                    <td>12/Nov/2024</td>
-                  </tr>
-                  <tr>
-                    <td>Tertiary Results</td>
-                    <td>all sem marks.pdf</td>
-                    <td>
-                      <MdCheckBox />
-                    </td>
-                    <td>Prince Vijaykumar</td>
-                    <td>12/Nov/2024</td>
-                    <td>12/Nov/2024</td>
-                  </tr>
-                  <tr>
-                    <td>English Language Results</td>
-                    <td>ielts_result.pdf</td>
-                    <td>
-                      <MdCheckBox />
-                    </td>
-                    <td>Prince Vijaykumar</td>
-                    <td>12/Nov/2024</td>
-                    <td>12/Nov/2024</td>
-                  </tr>
+                  {applicant?.documents.map((document, index) => (
+                    <tr key={index}>
+                      <td>{document.document_type}</td>
+                      <td>{document.file_name}</td>
+                      <td>{document.certified ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}</td>
+                      <td>{document.certified_by}</td>
+                      <td>{document.certified_date ? new Date(document.certified_date).toLocaleDateString() : "-"}</td>
+                      <td>{document.upload_date ? new Date(document.upload_date).toLocaleDateString() : "-"}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
