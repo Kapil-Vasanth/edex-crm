@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 
 function SubmitApplication({applicant}) {

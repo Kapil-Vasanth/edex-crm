@@ -60,7 +60,7 @@ const Header = () => {
         </div>
         <nav>
           <ul className="current-menu">
-            <li onClick={() => handleHomeClick()}><FaHome /> Home</li>
+            {agent && <li onClick={handleHomeClick}><FaHome /> Home</li>}
             {/* <li><Link to="/remarks-details"><FaInfoCircle /> Remarks</Link></li> */}
             <li onClick={() => handleLogOut()}><FaSignOutAlt /> Log Out</li>
             <li><FaUser /> {agent || student || 'Anonymous'}</li>
