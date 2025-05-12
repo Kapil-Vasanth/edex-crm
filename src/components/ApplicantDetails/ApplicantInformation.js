@@ -201,7 +201,7 @@ function ApplicantInformation({applicantDetail}) {
           {renderField("Citizenship", "citizenship")}
           {renderField("Email", "email")}
           {renderField("Mobile", "phone")}
-          {renderField("Passport", "passport")}
+          {renderField("Passport#", "passport")}
           {renderField("Passport Expiry", "passport_expiry")}
           {renderField("IELTS/PTE", "ielts")}
           {renderField("Date of Form Filed", "date_of_form_filed", "agent")}

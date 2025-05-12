@@ -90,6 +90,7 @@ function Applicants() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [universityFilter, setUniversityFilter] = useState("all");
+  const [countryFilter, setCountryFilter] = useState("all");
 
   const applicantList = Array.isArray(myApplicants) ? myApplicants : [];
 
@@ -98,6 +99,12 @@ function Applicants() {
   ];
   uniqueUniversities.sort();
   uniqueUniversities.unshift("All Universities");
+
+  const uniqueCountries = [
+  ...new Set(applicantList.map((item) => item.country)),
+  ];
+  uniqueCountries.sort();
+  uniqueCountries.unshift("All Countries");
 
   // Filter items based on search term and university filter
   const filteredItems = myApplicants.filter((item) => {
@@ -114,7 +121,12 @@ function Applicants() {
       universityFilter === "All Universities" ||
       item.university === universityFilter;
 
-    return matchesSearch && matchesUniversity;
+    const matchesCountry =
+      countryFilter === "all" ||
+      countryFilter === "All Countries" ||
+      item.citizenship === countryFilter;
+
+    return matchesSearch && matchesUniversity && matchesCountry;
   });
 
   const totalItems = filteredItems.length;
@@ -160,7 +172,7 @@ function Applicants() {
       <h4> Email : {email} </h4>
       <h4> DOB : {dob} </h4>
       <h4> Mobile : {phone} </h4>
-      <h4> Passport : {passport} </h4>
+      <h4> Passport# : {passport} </h4>
       <h4> Passport Expiry: {passport_expiry} </h4>
       <h4> Referred By : {referred_by} </h4>
     </Tooltip>;
@@ -200,6 +212,18 @@ function Applicants() {
               ))}
             </select>
           </div>
+          <div className="filter">
+            <select value={countryFilter} onChange={(e) => {
+              setCountryFilter(e.target.value);
+              setCurrentPage(1);
+            }}>
+              {uniqueCountries.map((country, index) => (
+                <option key={index} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <div className="toggle-container">
@@ -212,8 +236,8 @@ function Applicants() {
                   <th>Last Name</th>
                   <th>IELTS/PTE Score</th>
                   <th>Forms</th>
-                  <th>OOP</th>
                   <th>Funds</th>
+                  <th>OOP</th>
                   <th>SOP</th>
                   <th>Application Status</th>
                   <th>Action</th>
@@ -230,8 +254,8 @@ function Applicants() {
                     <td>{item.last_name}</td>
                     <td>{item.ielts}</td>
                     <td>{item.date_of_form_filed}</td>
-                    <td>{item.offer_of_place}</td>
                     <td>{item.funds_loan || item.funds_direct_deposit}</td>
+                    <td>{item.offer_of_place}</td>
                     <td>{item.sop}</td>
                     <td>{item.status}</td>
                     <td className="action-view">
