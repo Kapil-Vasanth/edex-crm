@@ -80,6 +80,15 @@ function ApplicantDocuments ({applicant}){
                     </button>
                   </td>
                 </tr>
+                <tr>
+                  <td>Passport</td>
+                  <td>No</td>
+                  <td className="action">
+                    <button className="Upload-btn">
+                    <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
+                    </button>
+                  </td>
+                </tr>
                 
               </tbody>
             </table>

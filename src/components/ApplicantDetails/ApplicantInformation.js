@@ -74,7 +74,13 @@ function ApplicantInformation({applicantDetail}) {
     passport_expiry: { type: "date" },
   };
 
-  const renderField = (label, name) => {
+  const renderField = (label, name, onlyForRole = null) => {
+
+    const currentRole = localStorage.getItem("role"); // "agent", "student", etc.
+
+    if (onlyForRole && currentRole !== onlyForRole) {
+      return null; // Skip rendering if role doesn't match
+    }
     const config = fieldConfig[name];
     const value = formData[name] || "";
   
@@ -185,23 +191,24 @@ function ApplicantInformation({applicantDetail}) {
         <div className="info-grid">
           
           {renderField("Student ID", "student_id")}
+          {renderField("College ID", "college_id", "agent")}
           {renderField("First Name", "first_name")}
           {renderField("Last Name", "last_name")}
-          {renderField("University", "university")}
+          {renderField("Institution", "university")}
           {renderField("Date of Birth", "dob")}
           {renderField("Gender", "gender")}
           {renderField("Country", "country")}
           {renderField("Citizenship", "citizenship")}
           {renderField("Email", "email")}
-          {renderField("Phone No.", "phone")}
+          {renderField("Mobile", "phone")}
           {renderField("Passport", "passport")}
           {renderField("Passport Expiry", "passport_expiry")}
           {renderField("IELTS/PTE", "ielts")}
-          {renderField("Date of Form Filed", "date_of_form_filed")}
-          {renderField("Offer of Place", "offer_of_place")}
+          {renderField("Date of Form Filed", "date_of_form_filed", "agent")}
+          {renderField("Offer of Place", "offer_of_place", "agent")}
           {renderField("Funds loan", "funds_loan")}
-          {renderField("Funds Direct Deposit", "funds_direct_deposit")}
-          {renderField("SOP", "sop")}
+          {renderField("Funds Direct Deposit", "funds_direct_deposit", "agent")}
+          {renderField("SOP", "sop", "agent")}
           
         </div>
       </div>

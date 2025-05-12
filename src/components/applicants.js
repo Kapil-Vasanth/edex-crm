@@ -149,16 +149,17 @@ function Applicants() {
   };
 
   const TooltipDesc = ({data}) => {
-    const { student_id, university, citizenship, email, phone, passport, passport_expiry , referred_by, avatar, dob } = data;
+    const { student_id, university, citizenship, email, phone, passport, passport_expiry , referred_by, avatar, dob, college_id } = data;
     const avatarPath = avatar ? `${API.defaults.baseURL}/${avatar}` : "https://www.w3schools.com/howto/img_avatar.png";
     return <Tooltip id={data.student_id} className="big-tooltip">
       <img className="size-6" src={avatarPath} alt="Applicant" /> <br/>
       <h4> Student ID : {student_id}</h4>
-      <h4> University : {university} </h4>
+      <h4> College ID : {college_id}</h4>
+      <h4> Institution : {university} </h4>
       <h4> Citizenship : {citizenship} </h4>
       <h4> Email : {email} </h4>
       <h4> DOB : {dob} </h4>
-      <h4> Phone : {phone} </h4>
+      <h4> Mobile : {phone} </h4>
       <h4> Passport : {passport} </h4>
       <h4> Passport Expiry: {passport_expiry} </h4>
       <h4> Referred By : {referred_by} </h4>
