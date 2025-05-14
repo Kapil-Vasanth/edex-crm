@@ -25,6 +25,7 @@ const Header = () => {
   const agent = localStorage.getItem('agent'); // Get the token from local storage
   const student = localStorage.getItem('student'); // Get the token from local storage
   const role = localStorage.getItem('role'); // Get the token from local storage
+  const token = localStorage.getItem('authToken'); // Get the token from local storage
 
   const handleLogOut = () => {
     localStorage.removeItem('authToken'); // Remove the token from local storage
@@ -49,6 +50,10 @@ const Header = () => {
       dynamicCurrentMenuClass(mainNavUL, location.pathname);
     }
   }, [location]);
+
+  if(!token) {
+    return null; // Don't render the header if the token exists
+  }
 
   return (
     <header>
