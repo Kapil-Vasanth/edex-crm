@@ -4,10 +4,16 @@ import {  useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 function ApplicantInformation({applicantDetail}) {
+  console.log("applicant rendered");
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(applicantDetail);
   const handleEditToggle = () => setIsEditing((prev) => !prev);
+  
+  const [avatarPreview, setAvatarPreview] = useState(
+    formData.avatar ? `${API.defaults.baseURL}/${formData.avatar}` : null
+  );
+
   useEffect(() => {
     const currentRole = localStorage.getItem("role");
     if (currentRole === "student") {
@@ -15,19 +21,16 @@ function ApplicantInformation({applicantDetail}) {
     }
   }, []);
 
-  const [avatarPreview, setAvatarPreview] = useState(
-    formData.avatar ? `${API.defaults.baseURL}/${formData.avatar}` : null
-  );
-
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file && file.type === "image/jpeg") {
       try {
         const updatedAvatar = await uploadStudentAvatar(formData._id, file);
-        setAvatarPreview(`${API.defaults.baseURL}/${updatedAvatar.avatar}`);
+        console.log(`${API.defaults.baseURL}/${updatedAvatar.avatar}`)
+        setAvatarPreview(`${API.defaults.baseURL}/${updatedAvatar.avatar}?t=${Date.now()}`);
         setFormData((prev) => ({
           ...prev,
-          avatar_url: updatedAvatar.avatar,
+          avatar: updatedAvatar.avatar,
         }));
         queryClient.invalidateQueries(["applicants", formData._id]); // Invalidate the query to refetch data
         toast.success("Profile photo updated successfully!");
