@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { updateStudent, uploadStudentAvatar, API } from "../../api/api";
 import {  useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -8,6 +8,12 @@ function ApplicantInformation({applicantDetail}) {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(applicantDetail);
   const handleEditToggle = () => setIsEditing((prev) => !prev);
+  useEffect(() => {
+    const currentRole = localStorage.getItem("role");
+    if (currentRole === "student") {
+      setIsEditing(true);
+    }
+  }, []);
 
   const [avatarPreview, setAvatarPreview] = useState(
     formData.avatar ? `${API.defaults.baseURL}/${formData.avatar}` : null
