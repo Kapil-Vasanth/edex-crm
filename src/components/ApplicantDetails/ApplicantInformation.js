@@ -83,7 +83,7 @@ function ApplicantInformation({applicantDetail}) {
     passport_expiry: { type: "date" },
   };
 
-  const renderField = (label, name, onlyForRole = null) => {
+  const renderField = (label, name, onlyForRole = null, disabled = false) => {
 
     const currentRole = localStorage.getItem("role"); // "agent", "student", etc.
 
@@ -139,6 +139,7 @@ function ApplicantInformation({applicantDetail}) {
               value={value}
               onChange={handleChange}
               className="info-edit-input"
+              disabled={disabled}
             />
           );
       }
@@ -208,7 +209,7 @@ function ApplicantInformation({applicantDetail}) {
           {renderField("Gender", "gender")}
           {renderField("Country", "country")}
           {renderField("Citizenship", "citizenship")}
-          {renderField("Email", "email")}
+          {renderField("Email", "email", null, true)}
           {renderField("Mobile", "phone")}
           {renderField("Passport#", "passport")}
           {renderField("Passport Expiry", "passport_expiry")}
