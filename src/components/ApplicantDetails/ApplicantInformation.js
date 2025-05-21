@@ -139,7 +139,7 @@ function ApplicantInformation({applicantDetail}) {
               value={value}
               onChange={handleChange}
               className="info-edit-input"
-              disabled={disabled}
+              disabled={disabled && currentRole === "student"}
             />
           );
       }
