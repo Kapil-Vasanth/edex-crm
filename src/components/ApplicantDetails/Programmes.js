@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowUp, FaArrowDown, FaEye } from "react-icons/fa";
 import UnsubmittedProgrammesSection from "./UnsubmittedProgrammesSection";
+import SubmittedProgrammesSection from "./SubmittedProgrammesSection";
 
 function Programmes({applicant}) {
   
@@ -8,16 +9,6 @@ function Programmes({applicant}) {
 
   const unsubmittedProgrammes = [];
   const submittedProgrammes = [
-    {
-      id: "1838333",
-      programme: "Master of Computer and Information Sciences",
-      pathway: "Standard",
-      year: "2025",
-      Intake: "Full Year",
-      Status: "On hold",
-      Explanation: "Your application for this programme is on hold. For your application to continue you need to provide the documents we have requested",
-      ActionRequired: "Please check Arion correspondence for details",
-    }
   ];
 
   return (
@@ -31,6 +22,7 @@ function Programmes({applicant}) {
         {/* Unsubmitted Programmes Section */}
         <UnsubmittedProgrammesSection programmes={applicant.unsubmitted_programmes} studentId={applicant._id}/>
         {/* Submitted Programmes Section */}
+        <SubmittedProgrammesSection programmes={applicant.submitted_programmes} studentId={applicant._id}/>
         <div className="programmes-section">
           <div className="section-header">
             <h4 className="section-title">Submitted Programmes</h4>

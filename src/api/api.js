@@ -262,3 +262,14 @@ export const updateStudentUnsubmittedProgrammes = async (id, unsubmittedProgramm
         throw error;
     }
 }
+
+export const updateStudentSubmittedProgrammes = async (id, submittedProgrammes) => {
+    console.log("Updating submitted programmes for student ID:", id, "with programmes:", submittedProgrammes);
+    try {
+        const response = await API.put(`/students/${id}/submitted-programmes`, { "submitted_programmes": submittedProgrammes });
+        return response.data; // Returns the updated student
+    } catch (error) {
+        console.error("Error updating student submitted programmes:", error);
+        throw error;
+    }
+};
