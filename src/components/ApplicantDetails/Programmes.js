@@ -3,7 +3,6 @@ import UnsubmittedProgrammesSection from "./UnsubmittedProgrammesSection";
 import SubmittedProgrammesSection from "./SubmittedProgrammesSection";
 
 function Programmes({applicant}) {
-  
   return (
     <div className="details-responsive">
       <div className="programmes-container">
