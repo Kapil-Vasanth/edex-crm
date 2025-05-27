@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 
 function SubmitApplication({applicant}) {
-  
-
-  const submittedProgrammes = [];
+  // const submittedProgrammes = [];
  
     const [isAgreed, setIsAgreed] = useState(false);
   
@@ -297,16 +295,16 @@ function SubmitApplication({applicant}) {
                   </tr>
                 </thead>
                 <tbody>
-                  {submittedProgrammes.map((programme, index) => (
+                  {applicant?.submitted_programmes?.map((programme, index) => (
                     <tr key={index}>
                       <td>{programme.id}</td>
                       <td>{programme.programme}</td>
                       <td>{programme.pathway}</td>
                       <td>{programme.year}</td>
-                      <td>{programme.Intake}</td>
-                      <td>{programme.Status}</td>
-                      <td>{programme.Explanation}</td>
-                      <td>{programme.ActionRequired}</td>
+                      <td>{programme.intake}</td>
+                      <td>{programme.status}</td>
+                      <td>{programme.explanation}</td>
+                      <td>{programme.action_required}</td>
                     </tr>
                   ))}
                 </tbody>

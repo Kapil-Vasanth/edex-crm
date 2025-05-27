@@ -345,6 +345,7 @@ footer {
 .toggle-container {
   position: relative;
   padding: 0 20px;
+  min-height: 50vh;
 }
 .applicant-details-tab {
   margin-top: 20px;
