@@ -330,6 +330,7 @@ footer {
   flex-wrap: wrap;
   flex-direction: column;
   border-radius: 5px;
+  overflow-x: scroll;
 }
 .table-container {
   position: relative;
