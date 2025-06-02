@@ -8,13 +8,14 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
   const queryClient = useQueryClient();
   const [contacts, setContacts] = useState(emergencyContacts);
   const [editingIndex, setEditingIndex] = useState(null);
-  const [newContact, setNewContact] = useState({ name: "", relationship: "", phone_number: "" });
+  const [newContact, setNewContact] = useState({ name: "", relationship: "", phone_number: "", address: "" });
 
   useEffect(() => {
     const normalized = emergencyContacts.map(contact => ({
       name: contact.name || "",
       relationship: contact.relationship || "",
-      phone_number: contact.phone_number || ""
+      phone_number: contact.phone_number || "",
+      address: contact.address || ""
     }));
     setContacts(normalized);
   }, [emergencyContacts]);
@@ -46,7 +47,7 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
     if (!newContact.name || !newContact.relationship || !newContact.phone_number) return;
     const updated = [...contacts, newContact];
     setContacts(updated);
-    setNewContact({ name: "", relationship: "", phone_number: "" });
+    setNewContact({ name: "", relationship: "", phone_number: "", address: "" }); // Reset new contact fields
     await updateContactsOnServer(updated);
   };
 
@@ -82,6 +83,7 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
               <th>Name</th>
               <th>Relationship</th>
               <th>Phone Number</th>
+              <th>Address</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -93,6 +95,7 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
                     <td><input name="name" value={contact.name} onChange={(e) => handleChange(e, index)} /></td>
                     <td><input name="relationship" value={contact.relationship} onChange={(e) => handleChange(e, index)} /></td>
                     <td><input name="phone_number" value={contact.phone_number} onChange={(e) => handleChange(e, index)} /></td>
+                    <td><input name="address" value={contact.address} onChange={(e) => handleChange(e, index)} /></td>
                     <td>
                       <button className="save-btn" onClick={handleSave}><FaSave /></button>
                       <button className="cancel-btn" onClick={() => handleCancel()}><FaTimes /></button>
@@ -103,6 +106,7 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
                     <td>{contact.name}</td>
                     <td>{contact.relationship}</td>
                     <td>{contact.phone_number}</td>
+                    <td>{contact?.address}</td>
                     <td>
                       <button className="edit-btn" onClick={() => setEditingIndex(index)}><FaEdit /></button>
                       <button className="delete-btn" onClick={() => handleDelete(index)}><FaTrash /></button>
@@ -115,6 +119,7 @@ const EmergencyContactsSection = ({ emergencyContacts = [], studentId }) => {
               <td><input name="name" value={newContact.name} onChange={handleNewChange} /></td>
               <td><input name="relationship" value={newContact.relationship} onChange={handleNewChange} /></td>
               <td><input name="phone_number" value={newContact.phone_number} onChange={handleNewChange} /></td>
+              <td><input name="address" value={newContact.address} onChange={handleNewChange} /></td>
               <td><button className="add-btn" onClick={handleAdd}>Add</button></td>
             </tr>
           </tbody>
