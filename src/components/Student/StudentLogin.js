@@ -54,6 +54,9 @@ const StudentLogin = () => {
         <div className="forgot-password-link" style={{marginTop: '20px'}}>
           <Link to="/forgot-password">Forgot Password?</Link>
         </div>
+        <div className="forgot-password-link" style={{marginTop: '0px'}}>
+          <Link to="/student-signup">Create an account</Link>
+        </div>
       </form>
     </div>
   );

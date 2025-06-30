@@ -64,6 +64,26 @@ export const studentLogin = async (email, password) => {
     }
 }
 
+export const studentSignup = async ({ firstname, lastname, citizenship, email, password }) => {
+  try {
+    console.log("Signing up student with data:", { firstname, lastname, citizenship, email, password })
+    const response = await API.post('/auth/student-signup', {
+      firstname,
+      lastname,
+      citizenship,
+      email,
+      password,
+    });
+
+    // Optionally, return a message or student data
+    return response.data;
+  } catch (error) {
+    console.error('Error during student signup:', error);
+    throw error;
+  }
+};
+
+
 // Get all students
 export const getAllStudents = async () => {
     try {

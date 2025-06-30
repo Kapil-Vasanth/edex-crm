@@ -4,6 +4,7 @@ import Maincontent from './main-content';
 import ApplicantDetails from './ApplicantDetails/Applicant-Details';
 import RemarksDetails from './remarks-details';
 import StudentLogin from './Student/StudentLogin';
+import StudentSignup from './Student/StudentSignup';
 import AgentLogin from './AgentLogin'; 
 import Layout from './Layout';
 import { ToastContainer } from 'react-toastify';
@@ -26,6 +27,7 @@ function Mainwrapper() {
           </Route>
           <Route path="/login" element={<AgentLogin />} /> {/* Add the login route */}
           <Route path="/student-login" element={<StudentLogin />} />
+          <Route path="/student-signup" element={<StudentSignup />} />
 
           {/* New Password Routes */}
           <Route path="/forgot-password" element={<ForgotPassword />} />
