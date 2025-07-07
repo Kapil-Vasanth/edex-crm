@@ -28,7 +28,7 @@ function ApplicantDocuments ({applicant}){
               <tbody id="content">
                 <tr>
                   <td>English Language Results</td>
-                  <td>No</td>
+                  <td>Yes</td>
                   <td className="action">
                     <button className="Upload-btn">
                     <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
@@ -37,7 +37,7 @@ function ApplicantDocuments ({applicant}){
                 </tr>
                 <tr>
                   <td>College Result</td>
-                  <td>No</td>
+                  <td>Yes</td>
                   <td className="action">
                     <button className="Upload-btn">
                     <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
@@ -46,7 +46,7 @@ function ApplicantDocuments ({applicant}){
                 </tr>
                 <tr>
                   <td>CV</td>
-                  <td>No</td>
+                  <td>Yes</td>
                   <td className="action">
                     <button className="Upload-btn">
                     <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
@@ -55,7 +55,7 @@ function ApplicantDocuments ({applicant}){
                 </tr>
                 <tr>
                   <td>Cover Letter</td>
-                  <td>No</td>
+                  <td>Yes</td>
                   <td className="action">
                     <button className="Upload-btn">
                     <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
@@ -64,7 +64,7 @@ function ApplicantDocuments ({applicant}){
                 </tr>
                 <tr>
                   <td>SOP</td>
-                  <td>No</td>
+                  <td>Yes</td>
                   <td className="action">
                     <button className="Upload-btn">
                     <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
@@ -73,7 +73,7 @@ function ApplicantDocuments ({applicant}){
                 </tr>
                 <tr>
                   <td>VISA</td>
-                  <td>No</td>
+                  <td>Yes</td>
                   <td className="action">
                     <button className="Upload-btn">
                     <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
@@ -82,7 +82,7 @@ function ApplicantDocuments ({applicant}){
                 </tr>
                 <tr>
                   <td>Passport</td>
-                  <td>No</td>
+                  <td>Yes</td>
                   <td className="action">
                     <button className="Upload-btn">
                     <Link to="./uploadDocument" className="link"><FaUpload /> Upload </Link>
