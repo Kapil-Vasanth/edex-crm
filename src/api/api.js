@@ -293,3 +293,32 @@ export const updateStudentSubmittedProgrammes = async (id, submittedProgrammes) 
         throw error;
     }
 };
+
+export const getUniversities = async () => {
+    try {
+        const response = await API.get('/students/universities');
+        
+        const universities = [];
+        for(let i = 0; i < response.data.length; i++) {
+            if (response.data[i] !== null) {
+                universities.push({
+                    value: response.data[i],
+                    label: response.data[i]
+                });
+            }
+        }
+        // remove duplicates
+        const uniqueUniversities = Array.from(new Set(universities.map(item => item.value)))
+            .map(value => {
+                return {
+                    value: value,
+                    label: value
+                };
+            });
+
+        return uniqueUniversities; // Returns the list of universities
+    } catch (error) {
+        console.error('Error fetching universities:', error);
+        throw error; // Propagate the error
+    }
+};

@@ -1,13 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { updateStudent, uploadStudentAvatar, API } from "../../api/api";
-import {  useQueryClient } from "@tanstack/react-query";
+import { updateStudent, uploadStudentAvatar, getUniversities, API } from "../../api/api";
+import {  useQueryClient, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import CreatableSelect from 'react-select/creatable';
+
+
 
 function ApplicantInformation({applicantDetail}) {
-  console.log("applicant rendered");
   const queryClient = useQueryClient();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(applicantDetail);
+  
+  const {
+  data: universityOptionsdata,
+  isLoading: isUniversityLoading,
+  error: universityError
+  } = useQuery({
+    queryKey: ['universities'],
+    queryFn: getUniversities,
+    onError: (err) => {
+      toast.error("Error fetching universities. Please try again later.");
+      console.error("Error fetching universities:", err);
+    },
+  });
+
+  const [universityOptions, setUniversityOptions] = useState([]);
+
   const handleEditToggle = () => setIsEditing((prev) => !prev);
   
   const [avatarPreview, setAvatarPreview] = useState(
@@ -19,7 +37,16 @@ function ApplicantInformation({applicantDetail}) {
     if (currentRole === "student") {
       setIsEditing(true);
     }
-  }, []);
+
+     if (universityOptionsdata) {
+    const mapped = universityOptionsdata.map((uni) => ({
+      value: uni.value,
+      label: uni.label
+    }));
+    setUniversityOptions(mapped);
+  }
+    
+  }, [universityOptionsdata]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -41,6 +68,22 @@ function ApplicantInformation({applicantDetail}) {
       alert("Please upload a JPG image.");
     }
   };
+
+const handleUniversityChange = (selectedOption) => {
+  console.log("Selected University:", selectedOption);
+
+  if (
+    selectedOption &&
+    !universityOptions.find((option) => option.value === selectedOption.value)
+  ) {
+    setUniversityOptions((prev) => [...prev, selectedOption]); // ✅ safe update
+  }
+
+  setFormData((prev) => ({
+    ...prev,
+    university: selectedOption ? selectedOption.value : "",
+  }));
+};
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -204,7 +247,32 @@ function ApplicantInformation({applicantDetail}) {
           {renderField("College ID", "college_id", "agent")}
           {renderField("First Name", "first_name")}
           {renderField("Last Name", "last_name")}
-          {renderField("Institution", "university")}
+          {/* {renderField("Institution", "university")} */}
+          {isEditing ? (
+             <div className="info-item">
+              <span className="info-label">Institution</span>
+              <CreatableSelect
+                isClearable
+                options={universityOptions}
+                name="university"
+                value={
+                  universityOptions?.find(option => option.value === formData.university) || 
+                  (formData.university
+                    ? { value: formData.university, label: formData.university }
+                    : null)
+                }
+                onChange={handleUniversityChange}
+              />
+            </div>
+            ) : (
+              <div className="info-item">
+                <span className="info-label">Institution</span>
+                <span className="info-value">
+                  {universityOptions?.find(option => option.value === formData.university)?.label ||
+                  formData.university || "N/A"
+                  }</span>
+              </div>
+            )}
           {renderField("Date of Birth", "dob")}
           {renderField("Gender", "gender")}
           {renderField("Country", "country")}

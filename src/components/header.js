@@ -60,7 +60,7 @@ const Header = () => {
       <div className='header-wrapper'>
         <div className="logo">
           <div className="logo-box">
-            <Link to="/"><img src={logo} alt="Logo" /></Link>
+            <Link to="#"><img src={logo} alt="Logo" /></Link>
           </div>
         </div>
         <nav>
